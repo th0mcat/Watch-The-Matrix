@@ -20,6 +20,7 @@ struct RoomCell: View {
             }
             
             Text(room.name ?? room.generateName(for: matrix.userID))
+                .foregroundColor(isLocked ? .secondary : .primary)
                 .fontWeight(.medium)
                 .lineLimit(1)
             

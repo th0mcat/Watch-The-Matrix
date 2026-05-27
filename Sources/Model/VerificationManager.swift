@@ -46,7 +46,7 @@ import Matrix
     }
     
     /// Request verification for this watch device.
-    func requestVerification(using _: Client, deviceID: String, userID: String) {
+    func requestVerification(using client: Client, deviceID: String, userID: String) {
         guard !deviceID.isEmpty, !userID.isEmpty else {
             state = .failed(VerificationError.missingCredentials)
             return
@@ -58,6 +58,7 @@ import Matrix
         // this project currently does not expose a typed key verification request API here.
         // When `client.requestKeyVerification(for:deviceID:)` (or equivalent to-device request)
         // is available in the SDK, call it from this method.
+        withExtendedLifetime(client) { }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // Placeholder SAS data until Matrix SDK verification callbacks are wired in.

@@ -53,12 +53,13 @@ struct RoomCell: View {
 
 struct RoomCell_Previews: PreviewProvider {
     static let matrix = MatrixController.preview
+    static let verificationManager = VerificationManager()
     
     static var previews: some View {
         List {
             RoomCell(room: matrix.dataController.room(id: "!test0:example.org")!)
                 .environment(matrix)
-                .environment(VerificationManager())
+                .environment(verificationManager)
         }
     }
 }

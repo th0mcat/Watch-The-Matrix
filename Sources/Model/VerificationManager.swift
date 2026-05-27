@@ -70,7 +70,7 @@ import Matrix
         // this project currently does not expose a typed key verification request API here.
         // When `client.requestKeyVerification(for:deviceID:)` (or equivalent to-device request)
         // is available in the SDK, call it from this method.
-        withExtendedLifetime(client) { }
+        _ = client
         
         #if DEBUG
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

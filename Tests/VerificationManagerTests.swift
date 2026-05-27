@@ -28,17 +28,17 @@ final class VerificationManagerTests: XCTestCase {
         verificationManager.confirmVerification()
         let persistedVerificationManager = VerificationManager()
         
-        if case .verified = verificationManager.state {
-            XCTAssertTrue(VerificationManager.isVerified)
-        } else {
+        guard case .verified = verificationManager.state else {
             XCTFail("Expected verified state")
+            return
         }
+        XCTAssertTrue(VerificationManager.isVerified)
         
-        if case .verified = persistedVerificationManager.state {
-            XCTAssertFalse(persistedVerificationManager.canVerify)
-        } else {
+        guard case .verified = persistedVerificationManager.state else {
             XCTFail("Expected persisted verified state")
+            return
         }
+        XCTAssertFalse(persistedVerificationManager.canVerify)
     }
     
     func testInitialStateWhenPersistedAsVerified() {

@@ -21,14 +21,26 @@ import Matrix
     
     enum VerificationError: LocalizedError {
         case missingCredentials
+        case unsupportedSDK
         
         var errorDescription: String? {
             switch self {
             case .missingCredentials:
                 return "Missing user or device details."
+            case .unsupportedSDK:
+                return "Matrix SDK key verification is not available in this build."
             }
         }
     }
+    
+    private static let placeholderEmojis = [
+        VerificationEmoji(emoji: "🐶", description: "Dog"),
+        VerificationEmoji(emoji: "🌙", description: "Moon"),
+        VerificationEmoji(emoji: "🚲", description: "Bicycle"),
+        VerificationEmoji(emoji: "🌳", description: "Tree"),
+        VerificationEmoji(emoji: "📦", description: "Package"),
+        VerificationEmoji(emoji: "🎧", description: "Headphones"),
+    ]
     
     var state: VerificationState
     
@@ -60,17 +72,14 @@ import Matrix
         // is available in the SDK, call it from this method.
         withExtendedLifetime(client) { }
         
+        #if DEBUG
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // Placeholder SAS data until Matrix SDK verification callbacks are wired in.
-            self.state = .showingEmoji([
-                VerificationEmoji(emoji: "🐶", description: "Dog"),
-                VerificationEmoji(emoji: "🌙", description: "Moon"),
-                VerificationEmoji(emoji: "🚲", description: "Bicycle"),
-                VerificationEmoji(emoji: "🌳", description: "Tree"),
-                VerificationEmoji(emoji: "📦", description: "Package"),
-                VerificationEmoji(emoji: "🎧", description: "Headphones"),
-            ])
+            self.state = .showingEmoji(Self.placeholderEmojis)
         }
+        #else
+        state = .failed(VerificationError.unsupportedSDK)
+        #endif
     }
     
     func confirmVerification() {

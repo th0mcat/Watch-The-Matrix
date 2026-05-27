@@ -71,6 +71,8 @@ import Matrix
         // When `client.requestKeyVerification(for:deviceID:)` (or equivalent to-device request)
         // is added in a future SDK version, call it from this method.
         // `client` is intentionally accepted now so this method can directly call SDK APIs later.
+        // Current fallback behavior: DEBUG builds show placeholder emoji after 0.5s, release builds
+        // return `unsupportedSDK` so users are not taken through a fake production verification flow.
         
         #if DEBUG
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

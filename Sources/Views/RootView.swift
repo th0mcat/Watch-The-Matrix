@@ -17,6 +17,10 @@ struct RootView: View {
                   predicate: NSPredicate(format: "isSpace != true"),
                   animation: .default) var rooms: FetchedResults<Room>
     
+    var hasEncryptedRooms: Bool {
+        rooms.contains(where: \.isEncrypted)
+    }
+    
     var body: some View {
         List {
             if case let .syncError(error) = matrix.state {
@@ -43,7 +47,7 @@ struct RootView: View {
                 }
             }
             
-            if rooms.contains(where: \.isEncrypted) && !VerificationManager.isVerified {
+            if hasEncryptedRooms && !VerificationManager.isVerified {
                 ToolbarItem(placement: .primaryAction) {
                     Button { isPresentingVerification = true } label: {
                         Image(systemName: "lock.shield")

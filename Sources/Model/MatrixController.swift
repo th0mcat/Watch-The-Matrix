@@ -253,8 +253,8 @@ import KeychainAccess
                     getName(of: room)
                 }
                 
-                // Encrypted room metadata and timeline events can still be loaded before verification.
-                // Messages will remain encrypted/unreadable until device verification and SDK Olm/Megolm decryption are available.
+                // Metadata and timeline events are loaded for all encrypted rooms.
+                // Messages remain encrypted until device verification and SDK Olm/Megolm decryption are available.
                 getType(of: room)
                 loadMoreMessages(in: room)
             }

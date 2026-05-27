@@ -21,6 +21,11 @@ struct RootView: View {
         rooms.contains(where: \.isEncrypted)
     }
     
+    var isDeviceVerified: Bool {
+        if case .verified = verificationManager.state { return true }
+        return false
+    }
+    
     var body: some View {
         List {
             if case let .syncError(error) = matrix.state {
@@ -36,7 +41,7 @@ struct RootView: View {
                 NavigationLink(value: room) {
                     RoomCell(room: room)
                 }
-                .disabled(room.isEncrypted && !VerificationManager.isVerified)
+                .disabled(room.isEncrypted && !isDeviceVerified)
             }
         }
         .navigationTitle("Rooms")
@@ -47,7 +52,7 @@ struct RootView: View {
                 }
             }
             
-            if hasEncryptedRooms && !VerificationManager.isVerified {
+            if hasEncryptedRooms && !isDeviceVerified {
                 ToolbarItem(placement: .primaryAction) {
                     Button { isPresentingVerification = true } label: {
                         Image(systemName: "lock.shield")

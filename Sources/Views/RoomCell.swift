@@ -5,9 +5,15 @@ import SwiftUI
 struct RoomCell: View {
     @ObservedObject var room: Room
     @Environment(MatrixController.self) private var matrix
+    @Environment(VerificationManager.self) private var verificationManager
+    
+    var isDeviceVerified: Bool {
+        if case .verified = verificationManager.state { return true }
+        return false
+    }
     
     var isLocked: Bool {
-        room.isEncrypted && !VerificationManager.isVerified
+        room.isEncrypted && !isDeviceVerified
     }
     
     var title: some View {

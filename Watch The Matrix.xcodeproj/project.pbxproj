@@ -65,6 +65,9 @@
 		A5E9E87325F673C00054D1A2 /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E9E87225F673C00054D1A2 /* Reaction.swift */; };
 		A5E9E87B25F676730054D1A2 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E9E87A25F676730054D1A2 /* MessageView.swift */; };
 		A5FEEBEA27118E4200B57B84 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FEEBE927118E4200B57B84 /* SettingsView.swift */; };
+		A6A1B0012E25A00100A1B001 /* VerificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A1B0112E25A00100A1B001 /* VerificationManager.swift */; };
+		A6A1B0022E25A00100A1B001 /* VerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A1B0122E25A00100A1B001 /* VerificationView.swift */; };
+		A6A1B0032E25A00100A1B001 /* VerificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A1B0132E25A00100A1B001 /* VerificationManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +164,9 @@
 		A5E9E87225F673C00054D1A2 /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
 		A5E9E87A25F676730054D1A2 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		A5FEEBE927118E4200B57B84 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A6A1B0112E25A00100A1B001 /* VerificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationManager.swift; sourceTree = "<group>"; };
+		A6A1B0122E25A00100A1B001 /* VerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationView.swift; sourceTree = "<group>"; };
+		A6A1B0132E25A00100A1B001 /* VerificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +200,7 @@
 				A58B95DF261F918100A3E8F5 /* MemberTests.swift */,
 				A51076872620A74A006362C0 /* MessageTests.swift */,
 				A560A48A278B34F100F5EC01 /* RedactionTests.swift */,
+				A6A1B0132E25A00100A1B001 /* VerificationManagerTests.swift */,
 				A59BB4F82618B22F00A91D68 /* EventProcessingTests.swift */,
 				A538FE0126B479B8004F37F6 /* Info.plist */,
 			);
@@ -206,6 +213,7 @@
 				A564A4C5260B4E6B00895426 /* DataController.swift */,
 				A54E5CCB25F5331900D43CDE /* Matrix.xcdatamodeld */,
 				A54E5CCD25F5331900D43CDE /* MatrixController.swift */,
+				A6A1B0112E25A00100A1B001 /* VerificationManager.swift */,
 				A54E5CCF25F5331900D43CDE /* Room.swift */,
 				A54E5CD025F5331900D43CDE /* Member.swift */,
 				A54E5CCE25F5331900D43CDE /* Message.swift */,
@@ -347,6 +355,7 @@
 				A52BA38625DECCDD00BBCCFC /* LoginView.swift */,
 				A56329DF263C3861003D0E67 /* LoginViewModel.swift */,
 				A5FEEBE927118E4200B57B84 /* SettingsView.swift */,
+				A6A1B0122E25A00100A1B001 /* VerificationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -521,6 +530,7 @@
 				A538FE0C26B479C1004F37F6 /* MemberTests.swift in Sources */,
 				A538FE0926B479C1004F37F6 /* EventProcessingTests.swift in Sources */,
 				A560A48B278B34F100F5EC01 /* RedactionTests.swift in Sources */,
+				A6A1B0032E25A00100A1B001 /* VerificationManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +545,7 @@
 				A59A0C5F25DD6AC200B5EDAA /* RootView.swift in Sources */,
 				A5BCCB5A260C9DAB00CBC29B /* Redaction.swift in Sources */,
 				A5FEEBEA27118E4200B57B84 /* SettingsView.swift in Sources */,
+				A6A1B0022E25A00100A1B001 /* VerificationView.swift in Sources */,
 				A564A4CE260B588B00895426 /* TestData.swift in Sources */,
 				A59437F4265D02DF00A81E1E /* MessageTransactionView.swift in Sources */,
 				A54E5CDC25F5342700D43CDE /* Message.swift in Sources */,
@@ -546,6 +557,7 @@
 				A5B43C0B264831F4005384AF /* Date-Formatting.swift in Sources */,
 				A5DCA2B4262B85F7004A328B /* ReactionsView.swift in Sources */,
 				A54E5CDE25F5342700D43CDE /* MatrixController.swift in Sources */,
+				A6A1B0012E25A00100A1B001 /* VerificationManager.swift in Sources */,
 				A5A77A75265833C000B683FF /* TransactionManager.swift in Sources */,
 				A52BA37325DEC59800BBCCFC /* RoomView.swift in Sources */,
 				A5BC73C72700B97E00AF5AF9 /* ImageBubble.swift in Sources */,

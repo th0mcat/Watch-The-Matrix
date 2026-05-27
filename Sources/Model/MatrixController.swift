@@ -253,10 +253,10 @@ import KeychainAccess
                     getName(of: room)
                 }
                 
-                if !room.isEncrypted {
-                    getType(of: room)
-                    loadMoreMessages(in: room)
-                }
+                // Metadata and timeline events are loaded for all encrypted rooms.
+                // Messages remain encrypted until device verification and SDK Olm/Megolm decryption are available.
+                getType(of: room)
+                loadMoreMessages(in: room)
             }
         }
     }

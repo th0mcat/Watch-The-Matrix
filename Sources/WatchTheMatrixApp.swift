@@ -4,6 +4,7 @@ import Matrix
 @main
 struct WatchTheMatrixApp: App {
     @State private var matrix = MatrixController()
+    @State private var verificationManager = VerificationManager()
     @Environment(\.scenePhase) private var scenePhase
     
     var body: some Scene {
@@ -22,6 +23,7 @@ struct WatchTheMatrixApp: App {
                         .environment(matrix)
                 }
             }
+            .environment(verificationManager)
         }
         .onChange(of: scenePhase, updateSyncState)
 

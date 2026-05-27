@@ -5,6 +5,24 @@ import SwiftUI
 struct RoomCell: View {
     @ObservedObject var room: Room
     @Environment(MatrixController.self) private var matrix
+    @Environment(VerificationManager.self) private var verificationManager
+    
+    var isDeviceVerified: Bool {
+        if case .verified = verificationManager.state { return true }
+        return false
+    }
+    
+    var isLocked: Bool {
+        room.isEncrypted && !isDeviceVerified
+    }
+    
+    var titleColor: Color {
+        isLocked ? .secondary : .primary
+    }
+    
+    var unreadBadgeColor: Color {
+        isLocked ? .secondary : .accentColor
+    }
     
     var title: some View {
         HStack {
@@ -12,13 +30,20 @@ struct RoomCell: View {
             if room.unreadCount > 0 {
                 Image(systemName: "circlebadge.fill")
                     .imageScale(.small)
-                    .foregroundColor(.accentColor)
+                    .foregroundColor(unreadBadgeColor)
             }
             
             Text(room.name ?? room.generateName(for: matrix.userID))
-                .foregroundColor(.primary)
+                .foregroundColor(titleColor)
                 .fontWeight(.medium)
                 .lineLimit(1)
+            
+            Spacer()
+            
+            if isLocked {
+                Image(systemName: "lock.fill")
+                    .imageScale(.small)
+            }
         }
     }
     
@@ -32,37 +57,25 @@ struct RoomCell: View {
             .foregroundColor(.secondary)
     }
     
-    @ViewBuilder var encryptionNotice: some View {
-        (Text("Encrypted ") + Text(Image(systemName: "lock")))
-            .lineLimit(1)
-            .foregroundColor(.secondary)
-        
-        Text("Unsupported Room")
-            .lineLimit(1)
-            .font(.footnote)
-            .foregroundColor(.secondary)
-    }
-    
     var body: some View {
         VStack(alignment: .leading) {
             title
-            
-            if room.isEncrypted {
-                encryptionNotice
-            } else {
-                detail
-            }
+            detail
         }
+        // Dim locked encrypted rooms until device verification is complete.
+        .foregroundColor(isLocked ? .secondary : .primary)
     }
 }
 
 struct RoomCell_Previews: PreviewProvider {
     static let matrix = MatrixController.preview
+    static let verificationManager = VerificationManager()
     
     static var previews: some View {
         List {
             RoomCell(room: matrix.dataController.room(id: "!test0:example.org")!)
                 .environment(matrix)
+                .environment(verificationManager)
         }
     }
 }

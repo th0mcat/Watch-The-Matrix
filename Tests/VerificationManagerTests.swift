@@ -28,6 +28,11 @@ final class VerificationManagerTests: XCTestCase {
         verificationManager.confirmVerification()
         let persistedVerificationManager = VerificationManager()
         
+        XCTAssertTrue({
+            if case .verified = verificationManager.state { return true }
+            return false
+        }())
+        
         guard case .verified = verificationManager.state else {
             XCTFail("Expected verified state")
             return

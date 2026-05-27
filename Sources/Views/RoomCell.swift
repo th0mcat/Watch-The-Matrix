@@ -16,17 +16,25 @@ struct RoomCell: View {
         room.isEncrypted && !isDeviceVerified
     }
     
+    var titleColor: Color {
+        isLocked ? .secondary : .primary
+    }
+    
+    var unreadBadgeColor: Color {
+        isLocked ? .secondary : .accentColor
+    }
+    
     var title: some View {
         HStack {
             // show a badge before the name if there are any unread messages
             if room.unreadCount > 0 {
                 Image(systemName: "circlebadge.fill")
                     .imageScale(.small)
-                    .foregroundColor(isLocked ? .secondary : .accentColor)
+                    .foregroundColor(unreadBadgeColor)
             }
             
             Text(room.name ?? room.generateName(for: matrix.userID))
-                .foregroundColor(isLocked ? .secondary : .primary)
+                .foregroundColor(titleColor)
                 .fontWeight(.medium)
                 .lineLimit(1)
             

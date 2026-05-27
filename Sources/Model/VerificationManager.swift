@@ -4,7 +4,7 @@ import Matrix
 /// Handles device verification flow state for encrypted Matrix rooms.
 @Observable class VerificationManager {
     private static let userDefaultsKey = "deviceVerified"
-    private static let debugVerificationDelay: TimeInterval = 0.5
+    private static let debugPlaceholderEmojiDelay: TimeInterval = 0.5
     
     struct VerificationEmoji: Identifiable {
         let id = UUID()
@@ -76,7 +76,7 @@ import Matrix
         // return `unsupportedSDK` so users are not taken through a fake production verification flow.
         
         #if DEBUG
-        DispatchQueue.main.asyncAfter(deadline: .now() + Self.debugVerificationDelay) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.debugPlaceholderEmojiDelay) {
             // Placeholder SAS data until Matrix SDK verification callbacks are wired in.
             self.state = .showingEmoji(Self.placeholderEmojis)
         }

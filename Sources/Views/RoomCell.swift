@@ -48,7 +48,7 @@ struct RoomCell: View {
             title
             detail
         }
-        // Dim inaccessible encrypted rooms until device verification is complete.
+        // Dim locked encrypted rooms until device verification is complete.
         .foregroundColor(isLocked ? .secondary : .primary)
     }
 }

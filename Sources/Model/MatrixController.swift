@@ -253,8 +253,8 @@ import KeychainAccess
                     getName(of: room)
                 }
                 
-                // Encrypted room metadata can still be loaded before verification.
-                // Message decryption requires device verification and Matrix SDK Olm/Megolm support.
+                // Encrypted room metadata and timeline events can still be loaded before verification.
+                // Messages will remain encrypted/unreadable until device verification and SDK Olm/Megolm decryption are available.
                 getType(of: room)
                 loadMoreMessages(in: room)
             }

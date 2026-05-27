@@ -253,10 +253,10 @@ import KeychainAccess
                     getName(of: room)
                 }
                 
-                if !room.isEncrypted {
-                    getType(of: room)
-                    loadMoreMessages(in: room)
-                }
+                // Encrypted room metadata can still be loaded before verification.
+                // Message decryption requires device verification and Matrix SDK Olm/Megolm support.
+                getType(of: room)
+                loadMoreMessages(in: room)
             }
         }
     }

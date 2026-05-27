@@ -4,9 +4,11 @@ import Matrix
 /// A view that displays all of the rooms that the user is currently joined to.
 struct RootView: View {
     @Environment(MatrixController.self) private var matrix
+    @Environment(VerificationManager.self) private var verificationManager
     
     // sheets and alerts
     @State private var isPresentingSettings = false
+    @State private var isPresentingVerification = false
     @State private var syncError: MatrixError?
     
     @Environment(\.managedObjectContext) var viewContext
@@ -30,7 +32,7 @@ struct RootView: View {
                 NavigationLink(value: room) {
                     RoomCell(room: room)
                 }
-                .disabled(room.isEncrypted)
+                .disabled(room.isEncrypted && !VerificationManager.isVerified)
             }
         }
         .navigationTitle("Rooms")
@@ -40,11 +42,24 @@ struct RootView: View {
                     Image(systemName: "person")
                 }
             }
+            
+            if rooms.contains(where: \.isEncrypted) && !VerificationManager.isVerified {
+                ToolbarItem(placement: .primaryAction) {
+                    Button { isPresentingVerification = true } label: {
+                        Image(systemName: "lock.shield")
+                    }
+                }
+            }
         }
         .navigationDestination(for: Room.self) { room in
             RoomView(room: room)
                 .environment(matrix)
                 .environment(\.managedObjectContext, viewContext)
+        }
+        .sheet(isPresented: $isPresentingVerification) {
+            VerificationView()
+                .environment(matrix)
+                .environment(verificationManager)
         }
         .sheet(isPresented: $isPresentingSettings) {
             SettingsView()
@@ -64,6 +79,7 @@ struct RootView_Previews: PreviewProvider {
         NavigationStack {
             RootView()
                 .environment(matrix)
+                .environment(VerificationManager())
                 .environment(\.managedObjectContext, matrix.dataController.viewContext)
         }
     }
